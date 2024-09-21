@@ -1,5 +1,6 @@
 package fvd.archi.clean.user.usecases.interactors;
 
+import fvd.archi.clean.technical.UseCasesBean;
 import fvd.archi.clean.user.usecases.boundaries.UserInputBoundary;
 import fvd.archi.clean.user.usecases.boundaries.UserPresenter;
 import fvd.archi.clean.user.usecases.boundaries.UserRegisterDsGateway;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@UseCasesBean
 @RequiredArgsConstructor
 public class UserRegisterInteractor implements UserInputBoundary {
 

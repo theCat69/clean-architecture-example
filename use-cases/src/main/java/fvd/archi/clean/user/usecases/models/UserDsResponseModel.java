@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 public class UserDsResponseModel {
+
   String login;
   LocalDateTime creationTime;
+
 }

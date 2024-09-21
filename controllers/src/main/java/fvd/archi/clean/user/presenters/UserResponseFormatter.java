@@ -4,12 +4,14 @@ import fvd.archi.clean.user.usecases.boundaries.UserPresenter;
 import fvd.archi.clean.user.usecases.models.UserDsResponseModel;
 import fvd.archi.clean.user.usecases.models.UserResponseModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@Service
 public class UserResponseFormatter implements UserPresenter {
 
   @Override
