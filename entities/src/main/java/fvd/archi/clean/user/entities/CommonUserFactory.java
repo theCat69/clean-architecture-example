@@ -1,8 +1,8 @@
 package fvd.archi.clean.user.entities;
 
-import fvd.archi.clean.technical.UseCasesBean;
+import fvd.archi.clean.technical.UseCasesComponents;
 
-@UseCasesBean
+@UseCasesComponents
 public class CommonUserFactory implements UserFactory {
   public User create(String name, String password) {
     return new CommonUser(name, password);

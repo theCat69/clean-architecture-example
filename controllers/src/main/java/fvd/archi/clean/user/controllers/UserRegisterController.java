@@ -25,4 +25,18 @@ public class UserRegisterController {
     return userInput.findAll();
   }
 
+  @GetMapping("{id}")
+  public UserResponseModel findById(@PathVariable String id) {
+    return userInput.findById(id);
+  }
+
+  @PutMapping
+  public UserResponseModel update(@RequestBody UserRequestModel requestModel) {
+    return userInput.update(requestModel);
+  }
+
+  @DeleteMapping("{id}")
+  public UserResponseModel delete(@PathVariable String id) {
+    return userInput.delete(id);
+  }
 }

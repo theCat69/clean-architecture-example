@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,5 +31,27 @@ public class JpaUser implements UserRegisterDsGateway {
     return repository.findAll().stream().map(userDataMapper -> new UserDsResponseModel(userDataMapper.getName(),
       userDataMapper.getCreationTime()))
       .toList();
+  }
+
+  @Override
+  public UserDsResponseModel findById(String id) {
+    return repository.findById(id).map(userDataMapper -> new UserDsResponseModel(userDataMapper.getName(),
+      userDataMapper.getCreationTime())).orElseThrow();
+  }
+
+  @Override
+  public UserDsResponseModel delete(String id) {
+    Optional<UserDataMapper> userDataMapper = repository.findById(id);
+    repository.deleteById(id);
+    return userDataMapper.map(userData -> new UserDsResponseModel(userData.getName(),
+      userData.getCreationTime())).orElseThrow();
+  }
+
+  @Override
+  public UserDsResponseModel update(UserDsRequestModel requestModel) {
+    UserDataMapper userDataMapper = repository.findById(requestModel.getName()).orElseThrow();
+    UserDataMapper userDataMapperSave = repository.save(new UserDataMapper(requestModel.getName(),
+      requestModel.getPassword(), userDataMapper.getCreationTime()));
+    return new UserDsResponseModel(userDataMapperSave.getName(), userDataMapperSave.getCreationTime());
   }
 }

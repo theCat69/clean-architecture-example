@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface UserPresenter {
   UserResponseModel prepareSuccessView(UserResponseModel user);
+  UserResponseModel prepareSuccessView(UserDsResponseModel user);
 
   List<UserResponseModel> prepareSuccessView(List<UserDsResponseModel> users);
 

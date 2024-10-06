@@ -17,20 +17,29 @@ public class UserResponseFormatter implements UserPresenter {
   @Override
   public UserResponseModel prepareSuccessView(UserResponseModel response) {
     LocalDateTime responseTime = LocalDateTime.parse(response.getCreationTime());
-    response.setCreationTime(responseTime.format(DateTimeFormatter.ofPattern("hh:mm:ss")));
+    response.setCreationTime(formatDate(responseTime));
     return response;
+  }
+
+  @Override
+  public UserResponseModel prepareSuccessView(UserDsResponseModel dsResponse) {
+    return prepareSuccessView(new UserResponseModel(dsResponse.getLogin(), formatDate(dsResponse.getCreationTime())));
   }
 
   @Override
   public List<UserResponseModel> prepareSuccessView(List<UserDsResponseModel> users) {
     return users.stream().map(userDsResponseModel ->
         new UserResponseModel(userDsResponseModel.getLogin(),
-          userDsResponseModel.getCreationTime().format(DateTimeFormatter.ofPattern("hh:mm:ss"))))
+          formatDate(userDsResponseModel.getCreationTime())))
       .toList();
   }
 
   @Override
   public UserResponseModel prepareFailView(String error) {
     throw new ResponseStatusException(HttpStatus.CONFLICT, error);
+  }
+
+  private String formatDate(LocalDateTime date){
+    return date.format(DateTimeFormatter.ofPattern("hh:mm:ss"));
   }
 }
