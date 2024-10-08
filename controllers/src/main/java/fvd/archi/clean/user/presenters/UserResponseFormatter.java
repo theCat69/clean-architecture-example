@@ -23,7 +23,7 @@ public class UserResponseFormatter implements UserPresenter {
 
   @Override
   public UserResponseModel prepareSuccessView(UserDsResponseModel dsResponse) {
-    return prepareSuccessView(new UserResponseModel(dsResponse.getLogin(), formatDate(dsResponse.getCreationTime())));
+    return new UserResponseModel(dsResponse.getLogin(), formatDate(dsResponse.getCreationTime()));
   }
 
   @Override
@@ -40,6 +40,6 @@ public class UserResponseFormatter implements UserPresenter {
   }
 
   private String formatDate(LocalDateTime date){
-    return date.format(DateTimeFormatter.ofPattern("hh:mm:ss"));
+    return date.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
   }
 }
